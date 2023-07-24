@@ -1,0 +1,26 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest/globals": true
+  },
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-underscore-dangle": [2, { "allow": ["__filename", "__dirname"] }],
+    "no-console": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "plugins": ["jest"]
+}

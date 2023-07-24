@@ -1,0 +1,6 @@
+{
+    "ignorePatterns": ["temp.js", "**/__tests__/*.js"],
+    "rules": {
+        //...
+    }
+}
