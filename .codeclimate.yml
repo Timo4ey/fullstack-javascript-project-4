@@ -1,0 +1,8 @@
+## other configuration excluded from example...
+exclude_patterns:
+  - 'tests/'
+  - '**/tests/'
+  - 'spec/'
+  - '**/vendor/'
+  - 'views*'
+  - '**__tests__/'

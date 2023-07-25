@@ -1,0 +1,35 @@
+name: Check tests and linter
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-vesrion: [20.x]
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-vesrion: ${{ matrix.node-version }}
+      - name: Install Dependecies
+        run: |
+          make install
+      - name: Run linter
+        run: |
+          make lint
+      - name: Run Jest
+        run: |
+          make test
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v4.0.0
+        if: github.ref_name == 'main'
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.TEST_COVERAGE }}
+        with:
+          CoverageCommand: make tests-coverage
+          debug: true
