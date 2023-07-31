@@ -119,8 +119,8 @@ describe('getDom', () => {
     const targetUrl = 'https://ru.hexlet.io/courses';
     const expected = [
       [
-        'upload-wikimedia-org-wikipedia-commons-thumb-d-d9-Node-js-logo-svg-131px-Node-js-logo-svg.png',
-        'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/131px-Node.js_logo.svg.png',
+        '//upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/131px-Node.js_logo.svg.png',
+        '//upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/131px-Node.js_logo.svg.png',
       ],
     ];
     const htmlTest1 = await fsp.readFile(path.join('testSrcWithDoubleSlash', 'testSrcWithDoubleSlash.html'), 'utf-8');

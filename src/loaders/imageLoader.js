@@ -53,7 +53,7 @@ export function arrangeLinks(linksArray, host) {
     .then((array) => {
       const output = array.reduce((acc, link) => {
         if (link.startsWith('//')) {
-          acc[getName(link)] = createLink(link.slice(2));
+          acc[link] = link;
         } else {
           acc[getName(`${host}${link}`)] = createLink(host, link);
         }
