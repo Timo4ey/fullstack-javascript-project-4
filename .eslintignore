@@ -1,5 +1,5 @@
 {
-    "ignorePatterns": ["temp.js", "**/__tests__/*.js"],
+    "ignorePatterns": ["temp.js", "**/__tests__/*.js", "functions.js"],
     "rules": {
         //...
     }

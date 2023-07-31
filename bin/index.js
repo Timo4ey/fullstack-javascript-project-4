@@ -1,9 +1,3 @@
-import fsp from 'fs/promises';
-import path from 'path';
+import program from '../src/console/commdans.js';
 
-const createFile = (filename) => {
-  const thePath = path.join(process.cwd(), filename);
-  fsp.createFile(thePath);
-};
-
-export default createFile;
+program.parseAsync();

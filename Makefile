@@ -1,7 +1,7 @@
 install: 
 	npm i
 prettier:
-	npx prettier --write
+	npx prettier --write .
 
 lint:
 	npx eslint . 
