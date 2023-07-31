@@ -1,5 +1,6 @@
 const cutNameFromUrl = (url, format = 'html') => {
   const obj = new URL(url);
+  // const fullHostName = obj.length > 0 ? `${obj.host}${obj.pathname}` : obj.host;
   /*
   Response a new name
   */
