@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { loadImagesFromDOM } from '../loaders/imageLoader.js';
+import dataLoader from '../loaders/dataLoader.js';
 
 const program = new Command();
 program.name('page-loader').description('Page loader utility').version('0.0.1');
@@ -13,6 +13,6 @@ program
     '/home/user/current-dir',
   )
   .argument('<url>')
-  .action((link, dir) => loadImagesFromDOM(link, dir.output));
+  .action((link, dir) => dataLoader(link, dir.output));
 
 export default program;
