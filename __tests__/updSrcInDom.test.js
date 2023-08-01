@@ -6,7 +6,9 @@ import mock from 'mock-fs';
 import { createNameDir } from '../src/dirWorkers/createDirectory.js';
 import { updSrcInDom, updHrefCanonicalInDom, updSrcInDomJS } from '../src/loaders/updSrcInDom.js';
 import getDom from '../src/loaders/getDom.js';
+import axiosInt from '../src/debug/debuger.js';
 
+axiosInt();
 function getArrayFromHTML(html) {
   return html
     .split(' ')

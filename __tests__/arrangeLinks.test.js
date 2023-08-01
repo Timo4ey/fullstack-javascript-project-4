@@ -6,7 +6,9 @@ import mock from 'mock-fs';
 import { getSrc, getScripts } from '../src/loaders/getScripts.js';
 import getDom from '../src/loaders/getDom.js';
 import { arrangeLinks, arrangeJsLinks, createLink } from '../src/loaders/arrangeLinks.js';
+import axiosInt from '../src/debug/debuger.js';
 
+axiosInt();
 let host;
 
 beforeAll(async () => {

@@ -5,7 +5,9 @@ import mock from 'mock-fs';
 
 import { getSrc, getScripts } from '../src/loaders/getScripts.js';
 import getDom from '../src/loaders/getDom.js';
+import axiosInt from '../src/debug/debuger.js';
 
+axiosInt();
 function getArrayFromHTML(html) {
   return html
     .split(' ')

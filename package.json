@@ -6,12 +6,15 @@
   "scripts": {
     "test": "jest"
   },
-  "bin": {"page-loader": "bin/index.js"},
+  "bin": {
+    "page-loader": "bin/index.js"
+  },
   "type": "module",
   "keywords": [],
   "author": "Timofey Yakovishin_",
   "license": "ISC",
   "devDependencies": {
+    "axios-debug-log": "^1.0.0",
     "eslint": "^8.45.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -33,6 +36,7 @@
     "babel-jest": "^29.6.1",
     "cheerio": "^1.0.0-rc.12",
     "commander": "^11.0.0",
+    "debug": "^4.3.4",
     "lodash": "^4.17.21"
   }
 }

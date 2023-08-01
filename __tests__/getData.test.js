@@ -7,9 +7,11 @@ import { getData } from '../src/loaders/getData.js';
 import { getSrc } from '../src/loaders/getScripts.js';
 import getDom from '../src/loaders/getDom.js';
 import { arrangeLinks } from '../src/loaders/arrangeLinks.js';
+import axiosInt from '../src/debug/debuger.js';
+
+axiosInt();
 
 let host;
-
 beforeAll(async () => {
   const newLocal = '__fixtures__/tests1/testGetDom.html';
   const testWithoutSrcS = '__fixtures__/tests1/testWithoutSrcS.html';

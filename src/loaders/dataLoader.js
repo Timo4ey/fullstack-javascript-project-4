@@ -42,4 +42,4 @@ export default function dataLoader(link, thePath) {
     createFile(cutNameFromUrl(link), thePath, $.html());
   });
 }
-// console.log(await loadImagesFromDOM('http://127.0.0.1:5000/courses'));
+// console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));

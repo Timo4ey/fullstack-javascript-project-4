@@ -10,7 +10,7 @@ publish:
 	npm publish --dry-run
 
 test:
-	npm test
+	npm test 
 
 tests-coverage:
 	npx jest --coverage
