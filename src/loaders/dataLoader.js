@@ -8,9 +8,8 @@ import getDom from './getDom.js';
 import { updSrcInDomJS, updSrcInDom, updHrefCanonicalInDom } from './updSrcInDom.js';
 import { getScripts, getSrc } from './getScripts.js';
 import { getData, loadData } from './getData.js';
-// import Listr from 'listr';
 
-const createQue = (list) => {
+const tasksLoop = (list) => {
   const tasks = new Listr(list, { concurrent: true });
   return tasks.run().catch((err) => {
     console.error(err);
@@ -34,7 +33,7 @@ export default function dataLoader(link, thePath) {
       throw new Error('Invalid link. Please check the input link!');
     })
     .then(($) => {
-      attrs.map((attr) => {
+      const d = attrs.map((attr) => {
         const res =
           attr[0] === 'script' ? Promise.resolve(getScripts($, host)) : getSrc($, getherElements, attr[0], attr[1]);
         return (
@@ -44,20 +43,18 @@ export default function dataLoader(link, thePath) {
             .catch(console.error)
             .then((pangingLinks) => Promise.all(pangingLinks))
             .catch(console.error)
-            .then((arrangedLinks) => {
-              const data = getData(arrangedLinks);
-              createQue(data).then(() => $);
-              return data;
-            })
-            // .then((images) => loadData(images, filesDir))
-            // .then((tasks) =>
-            //   new Listr(tasks, { concurrent: true }).run().catch((err) => {
-            //     console.error(err);
-            //   }),
-            // )
+            .then((arrangedLinks) => getData(arrangedLinks, filesDir))
+            // .then((images) => loadData(images))
+
             .catch(console.error)
         );
       });
+      return d;
+    })
+    .then((promises) => Promise.all(promises))
+    .then((images) => {
+      loadData(images);
+      tasksLoop(images.flat());
     });
 
   getDom(link)
@@ -72,5 +69,6 @@ export default function dataLoader(link, thePath) {
       createFile(cutNameFromUrl(link), thePath, $.html());
     })
     .catch(console.error);
+  return filesDir;
 }
 console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));

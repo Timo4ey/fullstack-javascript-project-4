@@ -48,7 +48,7 @@ describe('getData', () => {
     // const expected = await fsp.readFile(path.join('var', 'after', 'ru-hexlet-io3.html'), 'utf-8');
     const htmlTest1 = await fsp.readFile(path.join('var', 'before', 'before_ru-hexlet-io3.html'), 'utf-8');
     const picture = await fsp.readFile(path.join('picture.png'), 'utf-8');
-    const expected = [['ru-hexlet-io-assets-professions-nodejs.png', Promise.resolve({})]];
+    const expected = [{ title: 'ru-hexlet-io-assets-professions-nodejs.png', task: () => Promise.resolve({}) }];
 
     nock('https://ru.hexlet.io').get('/courses').reply(200, htmlTest1);
     nock('https://ru.hexlet.io').get('/assets/professions/nodejs.png').reply(200, picture);
@@ -57,6 +57,6 @@ describe('getData', () => {
     const arrangedLinks = await arrangeLinks(links, host);
     const result = await getData(arrangedLinks);
 
-    expect(result).toEqual(expected);
+    expect(result[0].title).toEqual(expected[0].title);
   });
 });

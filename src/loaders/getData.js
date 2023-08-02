@@ -1,29 +1,25 @@
 import axios from 'axios';
 import fs from 'fs';
-import Listr from 'listr';
-
-import createDirectory from '../dirWorkers/createDirectory.js';
+import path from 'path';
 
 import errorHandler from '../errorHandlers/errorHandler.js';
 
-export const loadData = (images, dirPath) => {
+export const loadData = (images) => {
   const img = Promise.resolve(images)
     .then((response) => {
-      const result = response.map((page) => {
-        page[1].then((data) => data.data.pipe(fs.createWriteStream(`${dirPath}/${page[0]}`)));
-
-        return result;
-      });
+      const result = response.map((pages) =>
+        pages.map((page) => page.task().then((data) => data.data.pipe(fs.createWriteStream(page.title)))),
+      );
       return result;
     })
     .catch(errorHandler);
   return img;
 };
 
-export function getData(links) {
+export function getData(links, dirname = '') {
   const output = links.reduce((acc, item) => {
     acc.push({
-      title: item[0],
+      title: path.join(dirname, item[0]),
       task: () => axios({ method: 'get', url: item[1], responseType: 'stream' }),
     });
     return acc;
