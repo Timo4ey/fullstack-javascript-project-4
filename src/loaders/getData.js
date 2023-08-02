@@ -10,14 +10,14 @@ export const loadData = (images, dirPath) => {
 
       return result;
     })
-    .catch(console.log);
+    .catch(console.error);
   return img;
 };
 
 export function getData(links) {
   const output = Promise.resolve(links)
     .then((result) => result.map((item) => [item[0], axios({ method: 'get', url: item[1], responseType: 'stream' })]))
-    .catch(console.log);
+    .catch(console.error);
 
   return output;
 }
