@@ -1,5 +1,6 @@
 import axios from 'axios';
 import fs from 'fs';
+import errorHandler from '../errorHandlers/errorHandler.js';
 
 export const loadData = (images, dirPath) => {
   const img = Promise.resolve(images)
@@ -10,14 +11,14 @@ export const loadData = (images, dirPath) => {
 
       return result;
     })
-    .catch(console.error);
+    .catch(errorHandler);
   return img;
 };
 
 export function getData(links) {
   const output = Promise.resolve(links)
     .then((result) => result.map((item) => [item[0], axios({ method: 'get', url: item[1], responseType: 'stream' })]))
-    .catch(console.error);
+    .catch(errorHandler);
 
   return output;
 }
