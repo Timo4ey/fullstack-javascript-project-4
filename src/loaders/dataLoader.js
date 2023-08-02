@@ -1,3 +1,4 @@
+import Listr from 'listr';
 import createDirectory, { createNameDir } from '../dirWorkers/createDirectory.js';
 import createFile from '../dirWorkers/createFile.js';
 import cutNameFromUrl from '../dirWorkers/cutNameFromUrl.js';
@@ -7,6 +8,14 @@ import getDom from './getDom.js';
 import { updSrcInDomJS, updSrcInDom, updHrefCanonicalInDom } from './updSrcInDom.js';
 import { getScripts, getSrc } from './getScripts.js';
 import { getData, loadData } from './getData.js';
+// import Listr from 'listr';
+
+const createQue = (list) => {
+  const tasks = new Listr(list, { concurrent: true });
+  return tasks.run().catch((err) => {
+    console.error(err);
+  });
+};
 
 export default function dataLoader(link, thePath) {
   const url = new URL(link);
@@ -28,15 +37,26 @@ export default function dataLoader(link, thePath) {
       attrs.map((attr) => {
         const res =
           attr[0] === 'script' ? Promise.resolve(getScripts($, host)) : getSrc($, getherElements, attr[0], attr[1]);
-        return res
-          .catch(console.error)
-          .then((linkImages) => (attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host)))
-          .catch(console.error)
-          .then((pangingLinks) => Promise.all(pangingLinks))
-          .catch(console.error)
-          .then((arrangedLinks) => getData(arrangedLinks))
-          .then((images) => loadData(images, filesDir))
-          .catch(console.error);
+        return (
+          res
+            .catch(console.error)
+            .then((linkImages) => (attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host)))
+            .catch(console.error)
+            .then((pangingLinks) => Promise.all(pangingLinks))
+            .catch(console.error)
+            .then((arrangedLinks) => {
+              const data = getData(arrangedLinks);
+              createQue(data).then(() => $);
+              return data;
+            })
+            // .then((images) => loadData(images, filesDir))
+            // .then((tasks) =>
+            //   new Listr(tasks, { concurrent: true }).run().catch((err) => {
+            //     console.error(err);
+            //   }),
+            // )
+            .catch(console.error)
+        );
       });
     });
 
@@ -53,4 +73,4 @@ export default function dataLoader(link, thePath) {
     })
     .catch(console.error);
 }
-// console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
+console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
