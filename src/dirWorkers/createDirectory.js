@@ -11,9 +11,12 @@ export const createNameDir = (host, thePath) => {
 const createDirectory = (host, thePath = '') => {
   const nameDir = createNameDir(host, thePath);
 
-  return fsp.mkdir(nameDir, { recursive: true }).catch((err) => {
-    throw new Error(`function: createDirectory. ${`${err.message}`} : ${nameDir}`);
-  });
+  return fsp
+    .mkdir(nameDir, { recursive: true })
+    .catch((err) => {
+      throw new Error(`function: createDirectory. ${`${err.message}`} : ${nameDir}`);
+    })
+    .then(() => nameDir);
 };
 
 export const checkAccess = (dir) =>

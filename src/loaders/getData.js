@@ -6,7 +6,12 @@ export const loadData = (images) => {
   const img = Promise.resolve(images)
     .then((response) => {
       const result = response.map((pages) =>
-        pages.map((page) => page.task().then((data) => data.data.pipe(fs.createWriteStream(page.title)))),
+        pages.map((page) =>
+          page
+            .task()
+            .then((data) => data.data.pipe(fs.createWriteStream(page.title)))
+            .catch((err) => console.log(err.message)),
+        ),
       );
       return result;
     })
