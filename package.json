@@ -7,7 +7,7 @@
     "test": "jest --verbose"
   },
   "bin": {
-    "page-loader": "bin/index.js"
+    "page-loader": "bin/page-loader.js"
   },
   "type": "module",
   "keywords": [],

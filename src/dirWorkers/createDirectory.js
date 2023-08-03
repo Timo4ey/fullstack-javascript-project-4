@@ -12,12 +12,12 @@ const createDirectory = (host, thePath = '') => {
   const nameDir = createNameDir(host, thePath);
 
   return fsp.mkdir(nameDir, { recursive: true }).catch((err) => {
-    throw new Error(`${`${err.message}`} : ${nameDir}`);
+    throw new Error(`function: createDirectory. ${`${err.message}`} : ${nameDir}`);
   });
 };
 
 export const checkAccess = (dir) =>
   fsp.access(dir).catch((err) => {
-    throw new Error(`${`${err.message}`} : ${dir}`);
+    throw new Error(`${`function: checkAccess. ${err.message}`} : ${dir}`);
   });
 export default createDirectory;

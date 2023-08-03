@@ -8,7 +8,9 @@ const createFile = (filename, filepath, data = '') => {
     fsp
       .writeFile(path.join(filepath, filename), data)
       .catch((error) => {
-        throw new Error(`Error creating file: ${error.message} (${path.join(filepath, filename)})`);
+        throw new Error(
+          `function: createFile. Error creating file: ${error.message} (${path.join(filepath, filename)})`,
+        );
       })
       .then(() => `${path.join(filepath, filename)}`)
       .catch((err) => console.err(err.message)),
