@@ -61,7 +61,8 @@ export default function dataLoader(link, thePath) {
           });
 
           updHrefCanonicalInDom($, link, pathname, filesDir);
-          return createFile(cutNameFromUrl(link), filesDir, $.html());
+          createFile(cutNameFromUrl(link), filesDir, $.html());
+          return createFile(cutNameFromUrl(link), thePath, $.html());
         })
         .catch(console.error),
     );
