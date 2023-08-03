@@ -4,7 +4,7 @@
   "description": "[![Actions Status](https://github.com/Timo4ey/fullstack-javascript-project-4/workflows/hexlet-check/badge.svg)](https://github.com/Timo4ey/fullstack-javascript-project-4/actions)",
   "main": "src/loaders/dataLoader.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "bin": {
     "page-loader": "bin/index.js"

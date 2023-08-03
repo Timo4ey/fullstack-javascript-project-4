@@ -1,15 +1,6 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 
-axios.interceptors.request.use(
-  (req) => req,
-  (error) => {
-    if (error) {
-      console.error('error');
-    }
-  },
-);
-
 export default function getDom(link) {
   const dom = axios
     .get(link)
