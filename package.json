@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "2.0.0",
   "description": "[![Actions Status](https://github.com/Timo4ey/fullstack-javascript-project-4/workflows/hexlet-check/badge.svg)](https://github.com/Timo4ey/fullstack-javascript-project-4/actions)",
-  "main": "bin/page-loader.js",
+  "main": "src/loaders/dataLoader.js",
   "scripts": {
     "test": "jest"
   },
@@ -34,10 +34,15 @@
     "@babel/preset-env": "^7.22.9",
     "axios": "^1.4.0",
     "babel-jest": "^29.6.1",
+    "babel-plugin-transform-import-meta": "^2.2.0",
     "cheerio": "^1.0.0-rc.12",
     "commander": "^11.0.0",
     "debug": "^4.3.4",
     "listr": "^0.14.3",
     "lodash": "^4.17.21"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
   }
 }
