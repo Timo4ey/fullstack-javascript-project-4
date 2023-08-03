@@ -4,3 +4,4 @@ coverage/
 temp*
 functions.js
 .en
+page-loader/
