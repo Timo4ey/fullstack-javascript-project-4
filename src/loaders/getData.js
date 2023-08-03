@@ -22,7 +22,8 @@ export function getData(links, dirname = '') {
       title: path.join(dirname, item[0]),
       task: () =>
         axios({ method: 'get', url: item[1], responseType: 'stream' }).catch((er) => {
-          throw new Error(`Function: getData. ${er.message}`);
+          // throw new Error(`Function: getData. ${er.message}`);
+          console.error(`Function: getData. ${er.message}`);
         }),
     });
     return acc;
