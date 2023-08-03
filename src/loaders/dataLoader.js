@@ -28,38 +28,29 @@ export default function dataLoader(link, thePath) {
   ];
 
   return checkAccess(thePath)
-    .then(createDirectory(urlHref, thePath))
-    .then(
+    .then(() => createDirectory(urlHref, thePath))
+    .then(() =>
       getDom(link)
-        .catch(console.error)
         .then(($) => {
-          const d = attrs.map((attr) => {
+          const data = attrs.map((attr) => {
             const res =
               attr[0] === 'script' ? Promise.resolve(getScripts($, host)) : getSrc($, getherElements, attr[0], attr[1]);
-            return (
-              res
-                .catch(console.error)
-                .then((linkImages) =>
-                  attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host),
-                )
-                .catch(console.error)
-                .then((pangingLinks) => Promise.all(pangingLinks))
-                .catch(console.error)
-                .then((arrangedLinks) => getData(arrangedLinks, filesDir))
-                // .then((images) => loadData(images))
-
-                .catch(console.error)
-            );
+            return res
+              .then((linkImages) =>
+                attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host),
+              )
+              .then((pangingLinks) => Promise.all(pangingLinks))
+              .then((arrangedLinks) => getData(arrangedLinks, filesDir));
           });
-          return d;
+          return data;
         })
         .then((promises) => Promise.all(promises))
         .then((images) => {
           loadData(images);
-          tasksLoop(images.flat());
+          return tasksLoop(images.flat());
         }),
     )
-    .then(
+    .then(() =>
       getDom(link)
         .then(($) => {
           attrs.map((attr) => {
@@ -71,7 +62,7 @@ export default function dataLoader(link, thePath) {
           });
 
           updHrefCanonicalInDom($, link, pathname, filesDir);
-          createFile(cutNameFromUrl(link), thePath, $.html());
+          return createFile(cutNameFromUrl(link), thePath, $.html());
         })
         .catch(console.error),
     );
