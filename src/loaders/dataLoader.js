@@ -39,7 +39,7 @@ export default function dataLoader(link, thePath) {
               )
               .then((pangingLinks) => Promise.all(pangingLinks))
               .then((arrangedLinks) => getData(arrangedLinks, filesDir))
-              .catch(console.error);
+              .catch((err) => console.error(`Function checkAccess after arrangedLinks  ${err.message}`));
           });
           return data;
         })
@@ -64,7 +64,7 @@ export default function dataLoader(link, thePath) {
           createFile(cutNameFromUrl(link), filesDir, $.html());
           return createFile(cutNameFromUrl(link), thePath, $.html());
         })
-        .catch(console.error),
+        .catch((err) => console.error(`Function page-loader end  ${err.message}`)),
     );
 }
 // console.log(await checkAccess('sys/'));
