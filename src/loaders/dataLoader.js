@@ -28,6 +28,7 @@ export default function dataLoader(link, thePath) {
   ];
   createDirectory(urlHref, thePath);
   getDom(link)
+    .catch(console.error)
     .then(($) => {
       const d = attrs.map((attr) => {
         const res =
