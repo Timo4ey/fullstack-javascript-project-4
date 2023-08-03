@@ -26,15 +26,13 @@ export default function dataLoader(link, thePath) {
     ['link[rel="stylesheet"]', 'href'],
     ['script', 'src'],
   ];
-
   return checkAccess(thePath)
     .then(() => createDirectory(urlHref, thePath))
     .then(() =>
       getDom(link)
         .then(($) => {
           const data = attrs.map((attr) => {
-            const res =
-              attr[0] === 'script' ? Promise.resolve(getScripts($, host)) : getSrc($, getherElements, attr[0], attr[1]);
+            const res = attr[0] === 'script' ? getScripts($, host) : getSrc($, getherElements, attr[0], attr[1]);
             return res
               .then((linkImages) =>
                 attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host),

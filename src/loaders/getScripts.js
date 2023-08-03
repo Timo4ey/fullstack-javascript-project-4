@@ -12,10 +12,12 @@ export function getSrc(html, filterFunction = getherElements, attr = 'img[src]',
   return srcS;
 }
 
-export function getScripts(dom, host) {
-  const jsLinksArray = dom('script').map((i, element) =>
-    dom(element).attr('src').includes(host) ? new Array(dom(element).attr('src')) : null,
-  );
-
-  return Array.from(new Set(jsLinksArray));
+export function getScripts(html, host) {
+  const jsLinksArray = Promise.resolve(html).then(($) => {
+    const data = $('script').map((i, element) =>
+      $(element).attr('src').includes(host) ? new Array($(element).attr('src')) : null,
+    );
+    return Array.from(new Set(data));
+  });
+  return jsLinksArray;
 }
