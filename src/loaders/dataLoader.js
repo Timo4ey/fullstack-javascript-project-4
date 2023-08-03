@@ -11,8 +11,8 @@ import { getData, loadData } from './getData.js';
 
 const tasksLoop = (list) => {
   const tasks = new Listr(list, { concurrent: true });
-  return tasks.run().catch((er) => {
-    throw new Error(`${er.message}`).then((d) => d);
+  return tasks.run().catch((err) => {
+    console.error(err);
   });
 };
 
