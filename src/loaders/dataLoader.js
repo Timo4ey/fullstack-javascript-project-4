@@ -12,7 +12,7 @@ import { getData, loadData } from './getData.js';
 const tasksLoop = (list) => {
   const tasks = new Listr(list, { concurrent: true });
   return tasks.run().catch((err) => {
-    console.error(err);
+    console.log(err.message);
   });
 };
 
