@@ -23,7 +23,7 @@ export function getData(links, dirname = '') {
       task: () =>
         axios({ method: 'get', url: item[1], responseType: 'stream' }).catch((er) => {
           // throw new Error(`Function: getData. ${er.message}`);
-          console.error(`Function: getData. ${er.message}`);
+          console.log(`Function: getData. ${er.message}`);
         }),
     });
     return acc;
