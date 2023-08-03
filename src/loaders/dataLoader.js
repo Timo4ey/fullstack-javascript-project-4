@@ -38,7 +38,8 @@ export default function dataLoader(link, thePath) {
                 attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host),
               )
               .then((pangingLinks) => Promise.all(pangingLinks))
-              .then((arrangedLinks) => getData(arrangedLinks, filesDir));
+              .then((arrangedLinks) => getData(arrangedLinks, filesDir))
+              .catch(console.error);
           });
           return data;
         })
