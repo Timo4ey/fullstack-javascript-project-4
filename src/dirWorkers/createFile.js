@@ -13,7 +13,7 @@ const createFile = (filename, filepath, data = '') => {
         );
       })
       .then(() => `${path.join(filepath, filename)}`)
-      .catch((err) => console.error(err.message)),
+      .catch((err) => console.log(err.message)),
   );
 };
 
