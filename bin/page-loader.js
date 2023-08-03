@@ -11,14 +11,14 @@ program
     '-o, --output [dir]',
 
     'output dir',
-    '/home/user/current-dir',
+    process.cwd(),
   )
   .argument('<url>')
-  .action((link, dir) => dataLoader(link, dir.output))
-  // .then((filePath) => console.log(`Page was successfully downloaded into '${filePath}'`))
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+  .action((link, dir) =>
+    dataLoader(link, dir.output).catch((err) => {
+      console.error(err);
+      process.exit(1);
+    }),
+  );
 
 program.parse(process.argv);
