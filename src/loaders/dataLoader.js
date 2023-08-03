@@ -28,10 +28,6 @@ export default function dataLoader(link, thePath) {
   ];
   createDirectory(urlHref, thePath);
   getDom(link)
-    .catch((error) => {
-      console.error(error.messages);
-      throw new Error('Invalid link. Please check the input link!');
-    })
     .then(($) => {
       const d = attrs.map((attr) => {
         const res =

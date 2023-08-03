@@ -2,8 +2,6 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 
-import errorHandler from '../errorHandlers/errorHandler.js';
-
 export const loadData = (images) => {
   const img = Promise.resolve(images)
     .then((response) => {
@@ -12,7 +10,9 @@ export const loadData = (images) => {
       );
       return result;
     })
-    .catch(errorHandler);
+    .catch((er) => {
+      throw new Error(`Function loadData cant install. ${er.message}`);
+    });
   return img;
 };
 

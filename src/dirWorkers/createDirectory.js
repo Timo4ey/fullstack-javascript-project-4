@@ -1,6 +1,5 @@
 import fsp from 'fs/promises';
 import path from 'path';
-import errorHandler from '../errorHandlers/errorHandler.js';
 
 export const createNameDir = (host, thePath) => {
   // eslint-disable-next-line no-useless-escape
@@ -12,7 +11,7 @@ export const createNameDir = (host, thePath) => {
 const createDirectory = (host, thePath = '') => {
   const nameDir = createNameDir(host, thePath);
 
-  fsp.mkdir(nameDir, { recursive: true }).catch(errorHandler);
+  fsp.mkdir(nameDir, { recursive: true });
   return nameDir;
 };
 

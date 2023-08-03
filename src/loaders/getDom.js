@@ -1,6 +1,5 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
-import errorHandler from '../errorHandlers/errorHandler.js';
 
 axios.interceptors.request.use(
   (req) => req,
@@ -15,7 +14,9 @@ export default function getDom(link) {
   const dom = axios
     .get(link)
     .then((response) => cheerio.load(response.data))
-    .catch(errorHandler);
+    .catch((err) => {
+      throw new Error(`Invalid link. ${err}. With link ${link}`);
+    });
 
   return dom;
 }

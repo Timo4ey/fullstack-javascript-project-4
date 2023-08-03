@@ -1,6 +1,6 @@
-export default async (error) => {
+export default (error) => {
   if (error) {
-    await console.error(error.message);
+    console.error(error.message);
     throw new Error(`${error.message}`);
   }
 };
