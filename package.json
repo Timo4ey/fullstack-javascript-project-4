@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "2.0.0",
   "description": "[![Actions Status](https://github.com/Timo4ey/fullstack-javascript-project-4/workflows/hexlet-check/badge.svg)](https://github.com/Timo4ey/fullstack-javascript-project-4/actions)",
-  "main": "bin/index.js",
+  "main": "bin/page-loader.js",
   "scripts": {
     "test": "jest"
   },
