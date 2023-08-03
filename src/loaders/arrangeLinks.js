@@ -10,16 +10,13 @@ export function arrangeJsLinks(linksArray) {
 }
 
 export function arrangeLinks(linksArray, host) {
-  const arrangedLinks = Promise.resolve(linksArray)
-    .then((array) => {
-      const output = array.reduce((acc, link) => {
-        if (!link.startsWith('//') && !link.startsWith('http')) {
-          acc[getName(`${host}${link}`)] = createLink(host, link);
-        }
-        return acc;
-      }, {});
-      return Object.entries(output);
-    })
-    .catch(console.log);
-  return arrangedLinks;
+  const arrangedLinks = linksArray.reduce((acc, link) => {
+    if (!link.startsWith('//') && !link.startsWith('http')) {
+      acc[getName(`${host}${link}`)] = createLink(host, link);
+    }
+    return acc;
+  }, {});
+  return Object.entries(arrangedLinks);
+
+  // return arrangedLinks;
 }

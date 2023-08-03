@@ -15,4 +15,8 @@ const createDirectory = (host, thePath = '') => {
   return nameDir;
 };
 
+export const checkAccess = (dir) =>
+  fsp.access(dir).catch((err) => {
+    throw new Error(`${`${err.message}`} : ${dir}`);
+  });
 export default createDirectory;
