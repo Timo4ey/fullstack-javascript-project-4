@@ -27,44 +27,48 @@ export default function dataLoader(link, thePath) {
     ['script', 'src'],
   ];
 
-  return checkAccess(thePath)
-    .then(() => createDirectory(urlHref, thePath))
-    .then(() =>
-      getDom(link)
-        .then(($) => {
-          const data = attrs.map((attr) => {
-            const res =
-              attr[0] === 'script' ? Promise.resolve(getScripts($, host)) : getSrc($, getherElements, attr[0], attr[1]);
-            return res
-              .then((linkImages) =>
-                attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host),
-              )
-              .then((pangingLinks) => Promise.all(pangingLinks))
-              .then((arrangedLinks) => getData(arrangedLinks, filesDir));
-          });
-          return data;
-        })
-        .then((promises) => Promise.all(promises))
-        .then((images) => {
-          loadData(images);
-          return tasksLoop(images.flat());
-        }),
-    )
-    .then(() =>
-      getDom(link)
-        .then(($) => {
-          attrs.map((attr) => {
-            const res =
-              attr[0] === 'script'
-                ? updSrcInDomJS($, host, filesDir)
-                : updSrcInDom($, host, filesDir, attr[0], attr[1]);
-            return res;
-          });
+  return (
+    checkAccess(thePath)
+      .then(() => createDirectory(urlHref, thePath))
+      .then(() =>
+        getDom(link)
+          .then(($) => {
+            const data = attrs.map((attr) => {
+              const res =
+                attr[0] === 'script'
+                  ? Promise.resolve(getScripts($, host))
+                  : getSrc($, getherElements, attr[0], attr[1]);
+              return res
+                .then((linkImages) =>
+                  attr[0] === 'script' ? arrangeJsLinks(linkImages) : arrangeLinks(linkImages, host),
+                )
+                .then((pangingLinks) => Promise.all(pangingLinks))
+                .then((arrangedLinks) => getData(arrangedLinks, filesDir));
+            });
+            return data;
+          })
+          .then((promises) => Promise.all(promises))
+          .then((images) => {
+            loadData(images);
+            return tasksLoop(images.flat());
+          }),
+      )
+      .then(() =>
+        getDom(link)
+          .then(($) => {
+            attrs.map((attr) => {
+              const res =
+                attr[0] === 'script'
+                  ? updSrcInDomJS($, host, filesDir)
+                  : updSrcInDom($, host, filesDir, attr[0], attr[1]);
+              return res;
+            });
 
-          updHrefCanonicalInDom($, link, pathname, filesDir);
-          return createFile(cutNameFromUrl(link), thePath, $.html());
-        })
-        .catch(console.error),
-    );
+            updHrefCanonicalInDom($, link, pathname, filesDir);
+            return createFile(cutNameFromUrl(link), thePath, $.html());
+          })
+          .catch(console.error),
+      ) || Promise.reject()
+  );
 }
 // console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
