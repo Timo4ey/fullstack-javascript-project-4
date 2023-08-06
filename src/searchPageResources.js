@@ -58,7 +58,7 @@ const tagHandler = ($, tag, pageUrl, resourceFolderPath) => {
   });
   return { $, resources };
 };
-export const searchPageResources = (pageContent, pageUrl, resourceFolderPath) => {
+const searchPageResources = (pageContent, pageUrl, resourceFolderPath) => {
   let $ = cheerio.load(pageContent.data);
   pageLoaderLog('Searching resources');
   const resources = Object.keys(tagTypes).reduce((acc, tag) => {
@@ -69,3 +69,5 @@ export const searchPageResources = (pageContent, pageUrl, resourceFolderPath) =>
 
   return { $, resources };
 };
+
+export default searchPageResources;
