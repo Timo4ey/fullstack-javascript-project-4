@@ -30,7 +30,7 @@ export default function dataLoader(link, thePath = process.cwd()) {
     ['link[rel="stylesheet"]', 'href'],
     ['script', 'src'],
   ];
-  return checkAccess(thePath)
+  checkAccess(thePath)
     .then(() => createDirectory(urlHref, thePath))
     .then(() =>
       getDom(link)
@@ -52,40 +52,37 @@ export default function dataLoader(link, thePath = process.cwd()) {
           loadData(images);
           return tasksLoop(images.flat());
         }),
-    )
-    .then(() =>
-      getDom(link)
-        .then(($) => {
-          attrs.map((attr) => {
-            const res =
-              attr[0] === 'script'
-                ? updSrcInDomJS($, host, filesDir)
-                : updSrcInDom($, host, filesDir, attr[0], attr[1]);
-            return res;
-          });
-          /*
+    );
+
+  getDom(link)
+    .then(($) => {
+      attrs.map((attr) => {
+        const res =
+          attr[0] === 'script' ? updSrcInDomJS($, host, filesDir) : updSrcInDom($, host, filesDir, attr[0], attr[1]);
+        return res;
+      });
+      /*
           if canonical != pathname
             dataLoader(link/canonical, filesDir)
           else:
             createFile(fileName, thePath, $.html())
           */
-          // console.log('!!getCanonical', Array.from(getCanonical($, link, pathname, filesDir)));
-          const canonicalPath = Array.from(getCanonical($))[0];
+      // console.log('!!getCanonical', Array.from(getCanonical($, link, pathname, filesDir)));
+      const canonicalPath = Array.from(getCanonical($))[0];
 
-          // canonicalPath === pathname ? null : dataLoader(path.join(link, canonicalPath), filesDir);
-          const l = path.join(origin, canonicalPath);
-          updHrefCanonicalInDom($, l, pathname, filesDir);
-          console.log(
-            '[cutNameFromUrl] !!',
-            cutNameFromUrl(path.join(origin, canonicalPath)),
-            path.join(origin, canonicalPath),
-          );
-          createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
-          console.log(`[BEFORE END!!!] ${cutNameFromUrl(link)}, ${thePath}`);
-          return createFile(cutNameFromUrl(link), thePath, $.html());
-        })
-        .catch((err) => console.error(`Function page-loader end  ${err.message}`)),
-    );
+      // canonicalPath === pathname ? null : dataLoader(path.join(link, canonicalPath), filesDir);
+      const l = path.join(origin, canonicalPath);
+      updHrefCanonicalInDom($, l, pathname, filesDir);
+      console.log(
+        '[cutNameFromUrl] !!',
+        cutNameFromUrl(path.join(origin, canonicalPath)),
+        path.join(origin, canonicalPath),
+      );
+      createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
+      console.log(`[BEFORE END!!!] ${cutNameFromUrl(link)}, ${thePath}`);
+      return createFile(cutNameFromUrl(link), thePath, $.html());
+    })
+    .catch((err) => console.error(`Function page-loader end  ${err.message}`));
 }
 // console.log(await checkAccess('sys/'));
 // console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
