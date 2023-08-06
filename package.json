@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "2.0.0",
   "description": "[![Actions Status](https://github.com/Timo4ey/fullstack-javascript-project-4/workflows/hexlet-check/badge.svg)](https://github.com/Timo4ey/fullstack-javascript-project-4/actions)",
-  "main": "src/loaders/dataLoader.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest --verbose"
   },
@@ -11,7 +11,7 @@
   },
   "type": "module",
   "keywords": [],
-  "author": "Timofey Yakovishin_",
+  "author": "Timofey Yakovishin",
   "license": "ISC",
   "devDependencies": {
     "axios-debug-log": "^1.0.0",
