@@ -5,7 +5,7 @@ import axios from 'axios';
 import { pageLoaderLog } from './pageLoaderLog.js';
 import saveData from './saveData.js';
 
-export const binaryFileLoader = (fileUrl, filePath) => {
+export const loadBinaryFile = (fileUrl, filePath) => {
   const data = {
     method: 'get',
     url: fileUrl,
@@ -19,7 +19,7 @@ export const binaryFileLoader = (fileUrl, filePath) => {
       throw new Error(`Error saving image: ${err.message} (${fileUrl})`);
     });
 };
-export const fileLoader = (resourceUrl, filePath) => {
+export const loadJsOrHref = (resourceUrl, filePath) => {
   const fileData = {
     method: 'get',
     url: resourceUrl,
@@ -28,7 +28,7 @@ export const fileLoader = (resourceUrl, filePath) => {
   return axios(fileData).then((response) => saveData(filePath, response.data));
 };
 
-export const buildListrTasks = (arr) => {
+export const buildTasks = (arr) => {
   pageLoaderLog('Create Listr tasks');
   return arr.reduce((acc, elem) => {
     acc.push({

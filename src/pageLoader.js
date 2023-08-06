@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { pageLoaderLog, errors } from './pageLoaderLog.js';
 
-const pageLoader = (url) => {
+const loadPage = (url) => {
   pageLoaderLog(`Loading data: ${url}`);
   return axios
     .get(url)
@@ -12,4 +12,4 @@ const pageLoader = (url) => {
     });
 };
 
-export default pageLoader;
+export default loadPage;

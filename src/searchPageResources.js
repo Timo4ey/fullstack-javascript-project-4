@@ -2,25 +2,25 @@ import path from 'path';
 
 import * as cheerio from 'cheerio';
 
-import { binaryFileLoader, fileLoader } from './buildListrTasks.js';
+import { loadBinaryFile, loadJsOrHref } from './buildListrTasks.js';
 import { pageLoaderLog } from './pageLoaderLog.js';
 import urlNameService from './urlNameService.js';
 
 const tagTypes = {
   img: {
     attr: 'src',
-    downloader: binaryFileLoader,
+    downloader: loadBinaryFile,
   },
   script: {
     attr: 'src',
-    downloader: fileLoader,
+    downloader: loadJsOrHref,
   },
   link: {
     attr: 'href',
-    downloader: fileLoader,
+    downloader: loadJsOrHref,
   },
 };
-const tagHandler = ($, tag, pageUrl, resourceFolderPath) => {
+const handlingTags = ($, tag, pageUrl, resourceFolderPath) => {
   const resources = [];
   const tagAttr = tagTypes[tag].attr;
   $(tag).each((i, pageTag) => {
@@ -64,7 +64,7 @@ const searchPageResources = (pageContent, pageUrl, resourceFolderPath) => {
   let $ = cheerio.load(pageContent.data);
   pageLoaderLog('Searching resources');
   const resources = Object.keys(tagTypes).reduce((acc, tag) => {
-    const result = tagHandler($, tag, new URL(pageUrl), resourceFolderPath);
+    const result = handlingTags($, tag, new URL(pageUrl), resourceFolderPath);
     $ = result.$;
     return [...acc, ...result.resources];
   }, []);

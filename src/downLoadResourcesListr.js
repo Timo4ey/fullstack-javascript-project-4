@@ -1,14 +1,14 @@
 import fsp from 'fs/promises';
 
-import { buildListrTasks } from './buildListrTasks.js';
-import progressHandle from './progressHandle.js';
+import { buildTasks } from './buildListrTasks.js';
+import handleProgress from './progressHandle.js';
 
-const downLoadResourcesListr = (data, resourceFolderPath) => {
+const downLoadResourcesForTasks = (data, resourceFolderPath) => {
   const { $, resources } = data;
   return fsp.mkdir(resourceFolderPath, { recursive: true }).then(() => {
-    const list = buildListrTasks(resources);
-    return progressHandle(list).then(() => $);
+    const list = buildTasks(resources);
+    return handleProgress(list).then(() => $);
   });
 };
 
-export default downLoadResourcesListr;
+export default downLoadResourcesForTasks;
