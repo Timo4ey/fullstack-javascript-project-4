@@ -1,6 +1,7 @@
 node_modules/
 coverage/
 .vscode/
-temp
+temp*
 functions.js
 .en
+page-loader/

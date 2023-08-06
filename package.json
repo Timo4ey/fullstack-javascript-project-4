@@ -2,16 +2,16 @@
   "name": "@hexlet/code",
   "version": "2.0.0",
   "description": "[![Actions Status](https://github.com/Timo4ey/fullstack-javascript-project-4/workflows/hexlet-check/badge.svg)](https://github.com/Timo4ey/fullstack-javascript-project-4/actions)",
-  "main": "bin/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "bin": {
-    "page-loader": "bin/index.js"
+    "page-loader": "bin/page-loader.js"
   },
   "type": "module",
   "keywords": [],
-  "author": "Timofey Yakovishin_",
+  "author": "Timofey Yakovishin",
   "license": "ISC",
   "devDependencies": {
     "axios-debug-log": "^1.0.0",
@@ -20,7 +20,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-jest": "^27.2.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -34,9 +34,15 @@
     "@babel/preset-env": "^7.22.9",
     "axios": "^1.4.0",
     "babel-jest": "^29.6.1",
+    "babel-plugin-transform-import-meta": "^2.2.0",
     "cheerio": "^1.0.0-rc.12",
     "commander": "^11.0.0",
     "debug": "^4.3.4",
+    "listr": "^0.14.3",
     "lodash": "^4.17.21"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
   }
 }
