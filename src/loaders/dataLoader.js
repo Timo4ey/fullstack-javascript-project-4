@@ -87,4 +87,4 @@ export default function dataLoader(link, thePath = process.cwd()) {
     );
 }
 // console.log(await checkAccess('sys/'));
-console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
+// console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
