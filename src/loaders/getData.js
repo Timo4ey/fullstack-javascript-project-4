@@ -10,7 +10,8 @@ export const loadData = (images) => {
           page
             .task()
             .then((data) => data.data.pipe(fs.createWriteStream(page.title)))
-            .catch((err) => console.log(`Function loadData cant install. ${err.message}`)),
+            .catch((err) => console.log(`Function loadData cant install. ${err.message}`))
+            .then((ms) => console.log(`Function loadData. ${ms} has been install`)),
         ),
       );
       return result;
