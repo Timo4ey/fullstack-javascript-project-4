@@ -20,11 +20,8 @@ const tasksLoop = (list) => {
 export default function dataLoader(link, thePath = process.cwd()) {
   const url = new URL(link);
   const { host, pathname, origin } = url;
-  console.log(url);
   const urlHref = pathname.length > 0 ? `${host}${pathname}` : host;
   const filesDir = createNameDir(urlHref, thePath);
-  const fileName = cutNameFromUrl(link);
-  console.log('###### FILE NAME !!!l:::', fileName);
   const attrs = [
     ['img[src]', 'src'],
     ['link[rel="stylesheet"]', 'href'],
@@ -82,4 +79,4 @@ export default function dataLoader(link, thePath = process.cwd()) {
     );
 }
 // console.log(await checkAccess('sys/'));
-console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
+// console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
