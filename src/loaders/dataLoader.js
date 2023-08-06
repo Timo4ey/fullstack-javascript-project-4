@@ -9,6 +9,7 @@ import getDom from './getDom.js';
 import { updSrcInDomJS, updSrcInDom, updHrefCanonicalInDom, getCanonical } from './updSrcInDom.js';
 import { getScripts, getSrc } from './getScripts.js';
 import { getData, loadData } from './getData.js';
+import getName from './getName.js';
 
 const tasksLoop = (list) => {
   const tasks = new Listr(list, { concurrent: true });
@@ -79,7 +80,7 @@ export default function dataLoader(link, thePath = process.cwd()) {
             cutNameFromUrl(path.join(origin, canonicalPath)),
             path.join(origin, canonicalPath),
           );
-          createFile(cutNameFromUrl(path.join(origin, canonicalPath)), filesDir, $.html());
+          createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
           return createFile(cutNameFromUrl(link), thePath, $.html());
         })
         .catch((err) => console.error(`Function page-loader end  ${err.message}`)),
