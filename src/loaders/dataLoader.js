@@ -79,7 +79,7 @@ export default function dataLoader(link, thePath = process.cwd()) {
             cutNameFromUrl(path.join(origin, canonicalPath)),
             path.join(origin, canonicalPath),
           );
-          // createFile(cutNameFromUrl(path.join(origin, canonicalPath)), filesDir, $.html());
+          createFile(cutNameFromUrl(path.join(origin, canonicalPath)), filesDir, $.html());
           return createFile(cutNameFromUrl(link), thePath, $.html());
         })
         .catch((err) => console.error(`Function page-loader end  ${err.message}`)),
