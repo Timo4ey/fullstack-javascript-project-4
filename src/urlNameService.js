@@ -2,22 +2,22 @@ import path from 'path';
 
 class URLNameService {
   pathNameBuilder(url) {
-    const myUrl = new URL(url);
-    const pageName = url
-      .replace(`${myUrl.protocol}//`, '')
+    this.myUrl = new URL(url);
+    this.pageName = url
+      .replace(`${this.myUrl.protocol}//`, '')
       .replace(/\/$/, '')
       .replace(/[^a-z0-9]/gi, '-');
-    return pageName;
+    return this.pageName;
   }
 
   createFileName(fileUrl) {
-    const myUrl = new URL(fileUrl);
-    const fileName = fileUrl
-      .replace(`${myUrl.protocol}//`, '')
+    this.newUrl = new URL(fileUrl);
+    this.newFilename = fileUrl
+      .replace(`${this.newUrl.protocol}//`, '')
       .replace(/\.\w+$/, '')
       .replace(/[^a-z0-9]/gi, '-');
-    const format = path.extname(fileUrl);
-    return `${fileName}${format}`;
+    this.format = path.extname(fileUrl);
+    return `${this.newFilename}${this.format}`;
   }
 
   createFolderName(url) {

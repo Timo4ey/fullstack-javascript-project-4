@@ -1,9 +1,8 @@
-/* eslint-disable no-undef */
 import fsp from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import os from 'os';
 import nock from 'nock';
+import { fileURLToPath } from 'url';
 import pageLoader from '../src/index.js';
 
 const fileNameSystem = fileURLToPath(import.meta.url);
@@ -18,16 +17,20 @@ let tempFolder;
 nock.disableNetConnect();
 const scope = nock(baseURL.origin).persist();
 const scopeError = nock('http://www.tim234.org/').persist();
+const pngName = 'ru-hexlet-io-assets-professions-nodejs.png';
 
 const resourcesPaths = [
-  ['/assets/professions/nodejs.png', path.join(resourcesDirName, 'ru-hexlet-io-assets-professions-nodejs.png')],
+  ['/assets/professions/nodejs.png', path.join(resourcesDirName, pngName)],
   ['/courses', path.join(resourcesDirName, 'ru-hexlet-io-courses.html')],
   ['/assets/application.css', path.join(resourcesDirName, 'ru-hexlet-io-assets-application.css')],
   ['/packs/js/runtime.js', path.join(resourcesDirName, 'ru-hexlet-io-packs-js-runtime.js')],
 ];
 
 beforeAll(() => {
-  resourcesPaths.forEach(([pathURL, filePath]) => scope.get(pathURL).replyWithFile(200, getFixturesPath(filePath)));
+  resourcesPaths.forEach(([pathURL, filePath]) => {
+    const res = scope.get(pathURL).replyWithFile(200, getFixturesPath(filePath));
+    return res;
+  });
   scopeError.get('/').reply(404);
   scopeError.get('/anyResourse').reply(404);
 });
