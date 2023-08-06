@@ -1,4 +1,5 @@
 import Listr from 'listr';
+
 import { pageLoaderLog } from './pageLoaderLog.js';
 
 const progressHandle = (list) => {

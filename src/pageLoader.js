@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { pageLoaderLog, errors } from './pageLoaderLog.js';
 
 const pageLoader = (url) => {

@@ -1,8 +1,10 @@
 import path from 'path';
-import cheerio from 'cheerio';
-import urlNameService from './urlNameService.js';
-import { pageLoaderLog } from './pageLoaderLog.js';
+
+import * as cheerio from 'cheerio';
+
 import { binaryFileLoader, fileLoader } from './buildListrTasks.js';
+import { pageLoaderLog } from './pageLoaderLog.js';
+import urlNameService from './urlNameService.js';
 
 const tagTypes = {
   img: {

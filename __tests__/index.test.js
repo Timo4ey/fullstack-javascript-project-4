@@ -1,8 +1,10 @@
 import fsp from 'fs/promises';
-import path from 'path';
 import os from 'os';
+import path from 'path';
 import { fileURLToPath } from 'url';
+
 import nock from 'nock';
+
 import pageLoader from '../src/index.js';
 
 const fileNameSystem = fileURLToPath(import.meta.url);

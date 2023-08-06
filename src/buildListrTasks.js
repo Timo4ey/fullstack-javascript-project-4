@@ -1,7 +1,9 @@
 import fs from 'fs';
+
 import axios from 'axios';
-import saveData from './saveData.js';
+
 import { pageLoaderLog } from './pageLoaderLog.js';
+import saveData from './saveData.js';
 
 export const binaryFileLoader = (fileUrl, filePath) => {
   const data = {
