@@ -17,10 +17,11 @@ export function getCanonical($) {
   );
 }
 
-export function updHrefCanonicalInDom($, host, pathname, dirname = '') {
+export function updHrefCanonicalInDom($, host, dirname = '') {
   const dirName = dirname.split('/').at(-1);
+  const filname = getName(cutNameFromUrl(host));
   return $('link').each((i, element) =>
-    $(element).attr('rel').includes('canonical') ? $(element).prop('href', path.join(dirName, host)) : null,
+    $(element).attr('rel').includes('canonical') ? $(element).prop('href', path.join(dirName, filname)) : null,
   );
 }
 

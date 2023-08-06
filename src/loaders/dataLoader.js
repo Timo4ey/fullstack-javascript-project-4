@@ -1,4 +1,4 @@
-import path from 'path';
+import path, { join } from 'path';
 import Listr from 'listr';
 import createDirectory, { createNameDir, checkAccess } from '../dirWorkers/createDirectory.js';
 import createFile from '../dirWorkers/createFile.js';
@@ -73,14 +73,13 @@ export default function dataLoader(link, thePath = process.cwd()) {
           const canonicalPath = Array.from(getCanonical($))[0];
 
           // canonicalPath === pathname ? null : dataLoader(path.join(link, canonicalPath), filesDir);
-          const l = path.join(origin, canonicalPath);
-          updHrefCanonicalInDom($, getName(cutNameFromUrl(link)), pathname, filesDir);
+          updHrefCanonicalInDom($, join(origin, canonicalPath), filesDir);
           // console.log(
           //   '[cutNameFromUrl] !!',
           //   cutNameFromUrl(path.join(origin, canonicalPath)),
           //   path.join(origin, canonicalPath),
           // );
-          // createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
+          createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
           console.log(`[BEFORE END!!!] ${cutNameFromUrl(link)}, ${thePath}`);
           return createFile(getName(cutNameFromUrl(link)), thePath, $.html());
         })
@@ -88,4 +87,4 @@ export default function dataLoader(link, thePath = process.cwd()) {
     );
 }
 // console.log(await checkAccess('sys/'));
-// console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));
+console.log(await dataLoader('http://127.0.0.1:5000/courses', 'page-loader'));

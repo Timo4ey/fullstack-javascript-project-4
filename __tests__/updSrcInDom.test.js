@@ -139,8 +139,8 @@ test('Test function updHrefCanonicalInDom.  Should return a list of entries CSS 
   const filesDir = await createNameDir('ru.hexlet.io/courses', 'courses/');
   const dom = await getDom(targetUrl);
 
-  updHrefCanonicalInDom(dom, 'https://ru.hexlet.io/courses', '/courses', filesDir);
-
+  updHrefCanonicalInDom(dom, 'https://ru.hexlet.io/courses', filesDir);
+  console.log(getArrayFromHTML(dom.html()));
   expect(
     getArrayFromHTML(dom.html()).filter((str) => str === 'href="ru-hexlet-io-courses_files/ru-hexlet-io-courses.html"'),
   ).toEqual(
