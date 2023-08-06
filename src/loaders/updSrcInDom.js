@@ -19,9 +19,8 @@ export function getCanonical($) {
 
 export function updHrefCanonicalInDom($, host, pathname, dirname = '') {
   const dirName = dirname.split('/').at(-1);
-  const filname = cutNameFromUrl(host);
   return $('link').each((i, element) =>
-    $(element).attr('rel').includes('canonical') ? $(element).prop('href', path.join(dirName, filname)) : null,
+    $(element).attr('rel').includes('canonical') ? $(element).prop('href', path.join(dirName, host)) : null,
   );
 }
 

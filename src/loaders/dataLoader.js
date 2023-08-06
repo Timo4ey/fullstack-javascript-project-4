@@ -74,13 +74,13 @@ export default function dataLoader(link, thePath = process.cwd()) {
 
           // canonicalPath === pathname ? null : dataLoader(path.join(link, canonicalPath), filesDir);
           const l = path.join(origin, canonicalPath);
-          updHrefCanonicalInDom($, l, pathname, filesDir);
-          console.log(
-            '[cutNameFromUrl] !!',
-            cutNameFromUrl(path.join(origin, canonicalPath)),
-            path.join(origin, canonicalPath),
-          );
-          createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
+          updHrefCanonicalInDom($, getName(cutNameFromUrl(link)), pathname, filesDir);
+          // console.log(
+          //   '[cutNameFromUrl] !!',
+          //   cutNameFromUrl(path.join(origin, canonicalPath)),
+          //   path.join(origin, canonicalPath),
+          // );
+          // createFile(getName(cutNameFromUrl(path.join(origin, canonicalPath))), filesDir, $.html());
           console.log(`[BEFORE END!!!] ${cutNameFromUrl(link)}, ${thePath}`);
           return createFile(getName(cutNameFromUrl(link)), thePath, $.html());
         })
