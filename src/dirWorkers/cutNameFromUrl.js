@@ -4,7 +4,7 @@ const cutNameFromUrl = (url, format = 'html') => {
   /*
   Response a new name
   */
-  return `${obj.hostname.replace(/\./g, '-')}-${obj.pathname.slice(1)}.${format}`;
+  return `${obj.host.replace(/\./g, '-')}-${obj.pathname.slice(1)}.${format}`;
 };
 
 export default cutNameFromUrl;

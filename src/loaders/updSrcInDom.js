@@ -11,12 +11,17 @@ export function updSrcInDomJS(dom, host, dirname = '') {
   );
 }
 // return dom;
+export function getCanonical($) {
+  return $('link[rel="canonical"]').map((i, element) =>
+    $(element).attr('rel').includes('canonical') ? new Array($(element).attr('href')) : null,
+  );
+}
 
-export function updHrefCanonicalInDom(dom, host, pathname, dirname = '') {
+export function updHrefCanonicalInDom($, host, pathname, dirname = '') {
   const dirName = dirname.split('/').at(-1);
   const filname = cutNameFromUrl(host);
-  return dom('link').each((i, element) =>
-    dom(element).attr('href').includes(pathname) ? dom(element).prop('href', path.join(dirName, filname)) : null,
+  return $('link').each((i, element) =>
+    $(element).attr('rel').includes('canonical') ? $(element).prop('href', path.join(dirName, filname)) : null,
   );
 }
 
