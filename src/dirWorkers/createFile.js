@@ -12,8 +12,8 @@ const createFile = (filename, filepath, data = '') => {
           `function: createFile. Error creating file: ${error.message} (${path.join(filepath, filename)})`,
         );
       })
-      .then(() => `${path.join(filepath, filename)}`)
-      .catch((err) => console.log(err.message)),
+      .catch((err) => console.log(`Function createFile.Error.${err.message}`))
+      .then(() => `${path.join(filepath, filename)}`),
   );
 };
 
