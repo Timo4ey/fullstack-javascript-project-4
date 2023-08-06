@@ -61,8 +61,9 @@ export default function dataLoader(link, thePath = process.cwd()) {
           });
 
           updHrefCanonicalInDom($, link, pathname, filesDir);
-          createFile(cutNameFromUrl(link), filesDir, $.html());
-          return createFile(cutNameFromUrl(link), thePath, $.html());
+          // createFile(cutNameFromUrl(link), filesDir, $.html());
+          // return createFile(cutNameFromUrl(link), thePath, $.html());
+          return createFile(cutNameFromUrl(link), filesDir, $.html());
         })
         .catch((err) => console.error(`Function page-loader end  ${err.message}`)),
     );
