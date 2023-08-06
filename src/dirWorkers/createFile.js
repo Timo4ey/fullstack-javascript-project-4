@@ -3,7 +3,7 @@ import path from 'path';
 import { checkAccess } from './createDirectory.js';
 
 const createFile = (filename, filepath, data = '') => {
-  console.log('!!!', filepath, path.join(filepath, filename));
+  console.log('Function: createFile', filepath, path.join(filepath, filename));
   return checkAccess(filepath).then(
     fsp
       .writeFile(path.join(filepath, filename), data)

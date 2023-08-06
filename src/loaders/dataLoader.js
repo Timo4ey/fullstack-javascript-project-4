@@ -19,7 +19,7 @@ const tasksLoop = (list) => {
 
 export default function dataLoader(link, thePath = process.cwd()) {
   console.log(`[LINK]: ${link}`);
-  console.log(`[LINK]: ${thePath}`);
+  console.log(`[PATH]: ${thePath}`);
   const url = new URL(link);
   const { host, pathname, origin } = url;
   const urlHref = pathname.length > 0 ? `${host}${pathname}` : host;
