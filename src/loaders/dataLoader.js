@@ -16,7 +16,7 @@ const tasksLoop = (list) => {
   });
 };
 
-export default function dataLoader(link, thePath) {
+export default function dataLoader(link, thePath = process.cwd()) {
   const url = new URL(link);
   const { host, pathname } = url;
   const urlHref = pathname.length > 0 ? `${host}${pathname}` : host;
@@ -61,8 +61,8 @@ export default function dataLoader(link, thePath) {
           });
 
           updHrefCanonicalInDom($, link, pathname, filesDir);
-          createFile(cutNameFromUrl(link), urlHref, $.html());
-          return createFile(cutNameFromUrl(link), urlHref, $.html());
+          createFile(cutNameFromUrl(link), filesDir, $.html());
+          return createFile(cutNameFromUrl(link), thePath, $.html());
         })
         .catch((err) => console.error(`Function page-loader end  ${err.message}`)),
     );
